@@ -8,32 +8,26 @@ public class CompressString {
         Scanner scan = new Scanner(System.in);
 
         String inputStr = scan.nextLine().toUpperCase();
-        char[] charArray = inputStr.toCharArray();
-
         String result = "";
-        Character temp = null;
-        int num = 1;
-        for (int i = 0; i < charArray.length; i++) {
-            if (temp == null) {
-                temp = charArray[i];
+        int cnt = 1;
+
+        for (int i = 0; i < inputStr.length()-1; i++) {
+            if (inputStr.charAt(i) == inputStr.charAt(i + 1)) {
+                cnt++;
             }else{
-                if (charArray[i] == temp) {
-                    num++;
+                if (cnt > 1) {
+                    result += inputStr.charAt(i) + String.valueOf(cnt);
                 }else{
-                    if (num > 1) {
-                        result += temp + String.valueOf(num);
-                    }else{
-                        result += temp;
-                    }
-                    temp = charArray[i];
-                    num = 1;
+                    result += inputStr.charAt(i);
                 }
+                cnt = 1;
             }
         }
-        if (num > 1) {
-            result += temp + String.valueOf(num);
+
+        if (cnt > 1) {
+            result += inputStr.charAt(inputStr.length() - 1) + String.valueOf(cnt);
         }else{
-            result += temp;
+            result += inputStr.charAt(inputStr.length() - 1);
         }
 
         System.out.println(result);
